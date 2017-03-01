@@ -16,7 +16,7 @@ function geoFindMe() {
     img.src = "https://maps.googleapis.com/maps/api/staticmap?center=" + latitude + "," + longitude + "&zoom=14&size=1440x1440&sensor=false";
 
     output.appendChild(img);
-    getWeatherData();
+    getWeatherData(latitude, longitude);
   }
 
   function error() {
@@ -26,28 +26,32 @@ function geoFindMe() {
   output.innerHTML = "<p>Locating…</p>";
 
   navigator.geolocation.getCurrentPosition(success, error);
+
+  function getWeatherData(latitude, longitude){
+
+  var URL = `api.openweathermap.org/data/2.5/weather?lat=${latitude}&lon=${longitude}`
+  var API_KEY = `&appid=f95c4888187e4ad64b526da1158daf6d`
+
+
+  var xhr = new XMLHttpRequest();
+  xhr.open('GET', URL + API_KEY, true);
+  xhr.onload = function() {
+      if (xhr.status === 200) {
+          alert('Date produced: ' + xhr.responseText);
+          console.log(xhr.responseText)
+      }
+      else {
+          alert('Request failed.  Returned status of ' + xhr.status);
+      }
+  };
+  xhr.send();
+
+  }
+
+
 }
 
 
-// api.openweathermap.org/data/2.5/forecast?lat={lat}&lon={lon}
-var getWeatherData (lat, lon){
 
-var API_KEY = api.openweathermap.org/data/2.5/weather?lat={lat}&lon={lon}
-
-
-var xhr = new XMLHttpRequest();
-xhr.open('GET', API_KEY);
-xhr.onload = function() {
-    if (xhr.status === 200) {
-        alert('Date produced: ' + xhr.responseText);
-        console.log(xhr.responseText)
-    }
-    else {
-        alert('Request failed.  Returned status of ' + xhr.status);
-    }
-};
-xhr.send();
-
-}
 
 
