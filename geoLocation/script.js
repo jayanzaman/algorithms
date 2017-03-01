@@ -16,6 +16,7 @@ function geoFindMe() {
     img.src = "https://maps.googleapis.com/maps/api/staticmap?center=" + latitude + "," + longitude + "&zoom=14&size=1440x1440&sensor=false";
 
     output.appendChild(img);
+    getWeatherData();
   }
 
   function error() {
@@ -29,7 +30,24 @@ function geoFindMe() {
 
 
 // api.openweathermap.org/data/2.5/forecast?lat={lat}&lon={lon}
+var getWeatherData (lat, lon){
 
-var API_KEY = api.openweathermap.org/data/2.5/forecast?
+var API_KEY = api.openweathermap.org/data/2.5/weather?lat={lat}&lon={lon}
 
-//  lat={lat}&lon={lon}
+
+var xhr = new XMLHttpRequest();
+xhr.open('GET', API_KEY);
+xhr.onload = function() {
+    if (xhr.status === 200) {
+        alert('Date produced: ' + xhr.responseText);
+        console.log(xhr.responseText)
+    }
+    else {
+        alert('Request failed.  Returned status of ' + xhr.status);
+    }
+};
+xhr.send();
+
+}
+
+
