@@ -31,13 +31,13 @@ function geoFindMe() {
 
   var URL = `api.openweathermap.org/data/2.5/weather?lat=${latitude}&lon=${longitude}`
   var API_KEY = `&appid=f95c4888187e4ad64b526da1158daf6d`
-
+  console.log(URL + API_KEY)
 
   var xhr = new XMLHttpRequest();
-  xhr.open('GET', URL + API_KEY, true);
+  xhr.open('GET', URL + API_KEY, false);
   xhr.onload = function() {
       if (xhr.status === 200) {
-          alert('Date produced: ' + xhr.responseText);
+          alert('Data produced: ' + xhr.responseText);
           console.log(xhr.responseText)
       }
       else {
